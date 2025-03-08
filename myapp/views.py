@@ -5,6 +5,9 @@ def question_list(request):
     questions = Question.objects.all()
     return render(request, "base.html", {"questions": questions})
 
+def thread(request):
+    return render(request, "thread.html")
+
 def add_question(request):
     if request.method == "POST":
         question_text = request.POST.get("question_text")

@@ -12,5 +12,5 @@ urlpatterns = [
     path("downvote_comment/<int:comment_id>/", downvote_comment, name="downvote_comment"),
     path("downvote_answer/<int:answer_id>/", downvote_answer, name="downvote_answer"),
     path("delete_all/", deleteAll, name="delete_all"),
-
+    path("thread/", views.thread, name="thread")
 ]
