@@ -10,7 +10,7 @@ urlpatterns = [
     path("add_comment/<int:answer_id>/", add_comment, name="add_comment"),
     path("upvote_comment/<int:comment_id>/", upvote_comment, name="upvote_comment"),
     path("upvote_answer/<int:answer_id>/", upvote_answer, name="upvote_answer"),
-    path("downvote_comment/<int:comment_id>/", downvote_comment, name="upvote_comment"),
-    path("downvote_answer/<int:answer_id>/", downvote_answer, name="upvote_answer"),
+    path("downvote_comment/<int:comment_id>/", downvote_comment, name="downvote_comment"),
+    path("downvote_answer/<int:answer_id>/", downvote_answer, name="downvote_answer"),
 
 ]

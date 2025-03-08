@@ -30,8 +30,11 @@
 
         <!-- Display Answers -->
         {% for answer in question.answers.all %}
-            <p>→ {{ answer.text }}(Upvotes: {{ answer.upvotes }}) 
-                <a href="{% url 'upvote_answer' answer.id %}">[Upvote]</a></p>
+            <p>→ {{ answer.text }}
+                <a href="{% url 'upvote_answer' answer.id %}">[Upvote]</a>
+                (Upvotes: {{ answer.upvotes }}) 
+                <a href="{% url 'downvote_answer' answer.id %}">[Downvote]</a>
+                </p></p>
 
             <!-- Add Comment Form -->
             <form method="POST" action="{% url 'add_comment' answer.id %}">
@@ -42,7 +45,7 @@
 
             <!-- Display Comments -->
             {% for comment in answer.comments.all %}
-                <p>--- {{ comment.text }} (Upvotes: {{ comment.upvotes }}) 
+                <p>--- {{ comment.text }} 
                     <a href="{% url 'upvote_comment' comment.id %}">[Upvote]</a>
                     (Upvotes: {{ comment.upvotes }}) 
                     <a href="{% url 'downvote_comment' comment.id %}">[Downvote]</a>
