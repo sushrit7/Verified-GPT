@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            width: 600px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .post-box {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .post-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: none;
+        }
+        .icons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        .icons button {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .post {
+            width: 600px;
+            padding: 15px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .user-info .details {
+            font-size: 14px;
+        }
+        .user-info .details p {
+            margin: 0;
+        }
+        .post-content {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            background: #edf2fc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #606770;
+        }
+        .comment-section {
+            margin-top: 10px;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+        }
+        .comment-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .comment-box img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .comment-box input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Post Input Box -->
+    <div class="container">
+        <div class="post-box">
+            <textarea class="post-input" placeholder="Write something..."></textarea>
+            <div class="icons">
+                <div>
+                    <span>📷</span>
+                    <span>📅</span>
+                    <span>📍</span>
+                    <span>🌍 Public</span>
+                </div>
+                <button>Post</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Post -->
+    <div class="post">
+        <div class="user-info">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="User">
+            <div class="details">
+                <p><strong>Anonymous</strong></p>
+                <p>35 mins ago · 🌎</p>
+            </div>
+        </div>
+        <div class="post-content">
+            <p>A guy enters a bakery while carrying a 25-pound haddock. He asks the baker if he makes fish cakes. The rather perplexed baker responds in the negative. The guy responds, "That's unfortunate. Today is his birthday!"</p>
+        </div>
+        <div class="post-actions">
+            <span>👍 23 Likes</span>
+            <span>💬 9 Comments</span>
+            <span>🔄 3 Shares</span>
+        </div>
+
+        <!-- Comment Section -->
+        <div class="comment-section">
+            <div class="comment-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="User">
+                <input type="text" placeholder="Add comment">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
