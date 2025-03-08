@@ -3,20 +3,15 @@ from .models import Question, Answer, Comment
 
 def question_list(request):
     questions = Question.objects.all()
-    return render(request, "Questions.html", {"questions": questions})
+    return render(request, "base.html", {"questions": questions})
 
 def add_question(request):
     if request.method == "POST":
         question_text = request.POST.get("question_text")
+        print(f"After deletion - Questions: {Question.objects.count()}, Answers: {Answer.objects.count()}, Comments: {Comment.objects.count()}")
         if question_text:
-            Question.objects.create(text=question_text)
-    return redirect("question_list")
-
-def add_answer(request, question_id):
-    if request.method == "POST":
-        answer_text = request.POST.get("answer_text")
-        question = Question.objects.get(id=question_id)
-        if answer_text:
+            question = Question.objects.create(text=question_text)
+            answer_text = "Call the API maybe"
             Answer.objects.create(question=question, text=answer_text)
     return redirect("question_list")
 
@@ -51,3 +46,19 @@ def downvote_answer(request, answer_id):
     answer.upvotes -= 1
     answer.save()
     return redirect("question_list")
+
+def deleteAll(request):
+    # Print the number of objects before deletion
+    print(f"Before deletion - Questions: {Question.objects.count()}, Answers: {Answer.objects.count()}, Comments: {Comment.objects.count()}")
+    
+    # Deleting all objects
+    Comment.objects.all().delete()
+    Answer.objects.all().delete()
+    Question.objects.all().delete()
+    
+    # Print the number of objects after deletion (should be 0)
+    print(f"After deletion - Questions: {Question.objects.count()}, Answers: {Answer.objects.count()}, Comments: {Comment.objects.count()}")
+    
+    # Redirect to the question list
+    return redirect("question_list")
+

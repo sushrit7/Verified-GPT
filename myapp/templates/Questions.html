@@ -21,13 +21,6 @@
     {% for question in questions %}
         <h2>{{ question.text }}</h2>
 
-        <!-- Add Answer Form -->
-        <form method="POST" action="{% url 'add_answer' question.id %}">
-            {% csrf_token %}
-            <input type="text" name="answer_text" placeholder="Write an answer" required>
-            <button type="submit">Submit</button>
-        </form>
-
         <!-- Display Answers -->
         {% for answer in question.answers.all %}
             <p>→ {{ answer.text }}
