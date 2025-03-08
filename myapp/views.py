@@ -4,3 +4,6 @@ from django.shortcuts import render, HttpResponse
 
 def home(request):
     return render(request, "base.html")
+
+def thread(request):
+    return render(request, "thread.html")
