@@ -1,14 +1,14 @@
 
 from google import genai
-
-
+from django.conf import settings
 
 # import requests
 # from decouple import config
-# API_KEY = config('LLM_API_KEY')
+
 
 def ask_llm(question):
-    client = genai.Client(api_key="")
+    print("API_KEY: ", settings.API_KEY)
+    client = genai.Client(api_key=settings.API_KEY)
     response = client.models.generate_content(
         model="gemini-2.0-flash", contents=question
     )

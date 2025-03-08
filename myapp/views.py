@@ -15,7 +15,7 @@ def add_question(request):
         print(f"After deletion - Questions: {Question.objects.count()}, Answers: {Answer.objects.count()}, Comments: {Comment.objects.count()}")
         if question_text:
             question = Question.objects.create(text=question_text)
-            answer_text = "Call the API maybe"
+            answer_text = ask_llm(question_text)
             Answer.objects.create(question=question, text=answer_text)
     return redirect("question_list")
 
