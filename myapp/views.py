@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer, Comment
+from .utils import ask_llm
 
 def question_list(request):
     questions = Question.objects.all()
@@ -64,4 +65,13 @@ def deleteAll(request):
     
     # Redirect to the question list
     return redirect("question_list")
+
+def test_view(request):
+    result = None
+    if request.method == "POST":
+        user_input = request.POST.get('user_input')
+        # Process the input (you can modify this logic)
+        result = ask_llm(user_input)
+
+    return render(request, 'test.html', {'result': result})
 
