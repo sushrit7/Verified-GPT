@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Platform</title>
+</head>
+<body>
+    <h1>Q&A Platform</h1>
+
+    <!-- Add Question Form -->
+    <form method="POST" action="{% url 'add_question' %}">
+        {% csrf_token %}
+        <input type="text" name="question_text" placeholder="Ask a question" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+
+    <!-- Display Questions and Answers -->
+    {% for question in questions %}
+        <h2>{{ question.text }}</h2>
+
+        <!-- Add Answer Form -->
+        <form method="POST" action="{% url 'add_answer' question.id %}">
+            {% csrf_token %}
+            <input type="text" name="answer_text" placeholder="Write an answer" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Display Answers -->
+        {% for answer in question.answers.all %}
+            <p>→ {{ answer.text }}(Upvotes: {{ answer.upvotes }}) 
+                <a href="{% url 'upvote_answer' answer.id %}">[Upvote]</a></p>
+
+            <!-- Add Comment Form -->
+            <form method="POST" action="{% url 'add_comment' answer.id %}">
+                {% csrf_token %}
+                <input type="text" name="comment_text" placeholder="Write a comment" required>
+                <button type="submit">Comment</button>
+            </form>
+
+            <!-- Display Comments -->
+            {% for comment in answer.comments.all %}
+                <p>--- {{ comment.text }} (Upvotes: {{ comment.upvotes }}) 
+                    <a href="{% url 'upvote_comment' comment.id %}">[Upvote]</a>
+                    (Upvotes: {{ comment.upvotes }}) 
+                    <a href="{% url 'downvote_comment' comment.id %}">[Downvote]</a>
+                </p>
+            {% endfor %}
+        {% endfor %}
+        <hr>
+    {% endfor %}
+</body>
+</html>
