@@ -6,6 +6,8 @@ from .utils import ask_llm
 def home(request):
     return render(request, "base.html")
 
+def thread(request):
+    return render(request, "thread.html")
 def test_view(request):
     result = None
     if request.method == "POST":
