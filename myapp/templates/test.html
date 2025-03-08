@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Template</title>
+</head>
+<body>
+    <h1>Test Template Input</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="user_input">Enter something:</label>
+        <input type="text" id="user_input" name="user_input">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <h2>Output:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
