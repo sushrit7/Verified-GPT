@@ -13,7 +13,7 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     def __str__(self):
-        return self.text[:50]
+        return self.text
 
 class Comment(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True, related_name='comments')
