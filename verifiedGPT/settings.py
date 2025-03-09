@@ -73,6 +73,13 @@ TEMPLATES = [
     },
 ]
 
+STATIC_URL ='/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "myapp" / "images",
+]
+
+
 WSGI_APPLICATION = 'verifiedGPT.wsgi.application'
 
 

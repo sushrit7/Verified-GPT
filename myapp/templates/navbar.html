@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post</title>
+    <style>
+        .nav-container {
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 15px 0; /* Increases the bar thickness */
+        margin-bottom: 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between; /* This will be updated */
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            position: relative; /* Needed for centering */
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 20px;
+            flex: 1; /* Makes nav-items take equal space */
+        }
+
+        .nav-brand {
+            position: absolute; /* Absolute positioning for centering */
+            left: 50%;
+            transform: translateX(-50%); /* Centers the logo */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nar-bar-logo {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+        }
+
+        .brand-name {
+            color: #000;
+            font-family: "Protest Strike", sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .nav-bar {
+            color: #000;
+            text-align: center;
+            font-family: "Protest Strike";
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+            padding: 5px 0; /* Increases the bar thickness */
+        }
+    </style>
+
+
+
+<!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <!-- Logo and Brand -->
+            <!-- Center Logo -->
+            <a href="/" class="nav-brand">
+                <img src="{% static 'images/checked.png' %}" class="nar-bar-logo">
+                <h2 class="nav-bar">Verified GPT</h2>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

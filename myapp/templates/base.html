@@ -1,3 +1,4 @@
+{% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,7 +126,17 @@
         }
     </style>
 </head>
+
+<!-- <script>
+    fetch("navbar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+        });
+</script> -->
+
 <body>
+    <!-- <div id="navbar"></div> -->
 
     <!-- Post Input Box -->
     <div class="container">
@@ -178,7 +189,9 @@
         <hr />
     </div>
 
+
     {% endfor %}
+
     <a  href="{% url 'delete_all' %}">delete</a>
 </body>
 </html>
