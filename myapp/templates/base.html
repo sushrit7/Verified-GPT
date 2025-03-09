@@ -1,3 +1,4 @@
+{% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,9 +108,21 @@
             border: 1px solid #ccc;
             border-radius: 20px;
         }
+
+
     </style>
 </head>
+
+<!-- <script>
+    fetch("navbar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+        });
+</script> -->
+
 <body>
+    <!-- <div id="navbar"></div> -->
 
     <!-- Post Input Box -->
     <div class="container">
@@ -146,11 +159,7 @@
             <p>{{ question.text }}</p>
         </div>
         <div class="post-actions">
-            <form method="post" action="{% url 'thread' question.id %}" onsubmit="this.submit();">
-                {% csrf_token %}
-                <a href="#" onclick="this.parentElement.submit();">💬 Comments</a>
-            </form>            
-            </form>
+            <span>💬 Comments</span>
         </div>
         <!-- Comment Section -->
         <div class="comment-section">
@@ -162,7 +171,9 @@
         </div>
     </div>
 
+
     {% endfor %}
+
     <a  href="{% url 'delete_all' %}">delete</a>
 </body>
 </html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer, Comment
 from .utils import ask_llm
-import markdown
+# import markdown
 
 def question_list(request):
     questions = Question.objects.all()
@@ -21,9 +21,9 @@ def update_thread(request, question_id):
             new_input += f" comment that said {comment.text} which had {comment.upvotes} upvotes"
 
         new_input += ". Using this information, what is the best answer to the question? Give better and more articulate answer addressing all the comments and prioritize high upvotes. Just give answer without filler words."
-        new_answer = ask_llm(new_input)
-        answer.text = new_answer
-        answer.save()
+        # new_answer = ask_llm(new_input)
+        # answer.text = new_answer
+        # answer.save()
     return render(request, "thread.html", {"question" : question})
 
 def add_question(request):
@@ -33,8 +33,8 @@ def add_question(request):
         if question_text:
             question = Question.objects.create(text=question_text)
            # answer_text = ask_llm(question_text)
-            answer_text = ask_llm(question_text)
-            Answer.objects.create(question=question, text=answer_text)
+            # answer_text = ask_llm(question_text)
+            # Answer.objects.create(question=question, text=answer_text)
     return redirect("question_list")
 
 def add_comment(request, answer_id, question_id):
@@ -89,7 +89,7 @@ def test_view(request):
     if request.method == "POST":
         user_input = request.POST.get('user_input')
         # Process the input (you can modify this logic)
-        result = ask_llm(user_input)
+        # result = ask_llm(user_input)
 
     return render(request, 'test.html', {'result': result})
 
