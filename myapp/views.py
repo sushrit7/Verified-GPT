@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer, Comment
-from .utils import ask_llm
+# from .utils import ask_llm
 import markdown
 from google import genai
 from django.conf import settings
@@ -96,7 +96,7 @@ def test_view(request):
     if request.method == "POST":
         user_input = request.POST.get('user_input')
         # Process the input (you can modify this logic)
-        result = ask_llm(user_input)
+        result = "ask_llm(user_input)"
 
     return render(request, 'test.html', {'result': result})
 
