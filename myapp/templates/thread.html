@@ -242,43 +242,36 @@
                 </div>
                 <form method="POST" action="{% url 'add_comment' answer.id question.id%}">
                     {% csrf_token %}
-                    <input class="input" type="text" placeholder="Write a comment" required>
+                    <input name="comment_text" type="text" placeholder="Write a comment" required>
                     <button type="submit">Comment</button>
                 </form>
             </div>
             {% for comment in answer.comments.all %}
-            <div class="comment-thread">
-                <!-- Comment 1 start -->
-                <div class="comment" id="comment-1">
-                    <span>{{ comment.upvotes }}  Likes</span>
-                    <div class="comment-voting">
+             
+            <!-- Comments section -->
+            <div class="comments-section">
+                <!-- First comment -->
+                <div class="answer">
+                    <p>{{ comment.text }}</p>
+                </div>
+                <div class="voting-section">
+                    <div class="vote-buttons">
                         <form method="POST" action="{% url 'upvote_comment' comment.id question.id %}">
                             {% csrf_token %}
-                        <button type="submit" >
-                            <span aria-hidden="true">&#9650;</span>
-                            <span class="sr-only">Vote up</span>
+                        <button class="vote-btn upvote-btn" type="submit" >
+                            <span>{{ comment.upvotes }} 👍 Upvotes</span>
                         </button>
                         </form>
                         <form method="POST" action="{% url 'downvote_comment' comment.id question.id %}">
                             {% csrf_token %}
-                        <button type="submit">
-                            <span aria-hidden="true">&#9660;</span>
-                            <span class="sr-only">Vote down</span>
+                        <button class="vote-btn downvote-btn" type="submit">
+                            <span>👎 Downvotes</span>
                         </button>
                         </form>
                     </div>
-        
-                    <div class="comment-body">
-                        <p>
-                           {{comment.text}}
-                        </p>
-                        <button type="button">Reply</button>
-                        <button type="button">Flag</button>
-                    </div>
-        
                 </div>
-                <!-- Comment 1 end -->
-            </div> 
+                <div class="comment-divider"></div>
+            </div>
             {% endfor %} 
             {% endfor %} 
             <div class="action-buttons">
