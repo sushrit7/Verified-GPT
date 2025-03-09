@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from .models import Question, Answer, Comment
 from .utils import ask_llm
 import markdown
+from google import genai
+from django.conf import settings
+from django.http import StreamingHttpResponse
+
+
 
 def question_list(request):
     questions = Question.objects.all()
@@ -24,9 +29,10 @@ def update_thread(request, question_id):
         new_answer = ask_llm(new_input)
         answer.text = new_answer
         answer.save()
-    return render(request, "thread.html", {"question" : question})
+    return redirect('thread', question_id=question_id)
 
 def add_question(request):
+    question_id = None
     if request.method == "POST":
         question_text = request.POST.get("question_text")
         print(f"After deletion - Questions: {Question.objects.count()}, Answers: {Answer.objects.count()}, Comments: {Comment.objects.count()}")
@@ -35,7 +41,8 @@ def add_question(request):
            # answer_text = ask_llm(question_text)
             answer_text = ask_llm(question_text)
             Answer.objects.create(question=question, text=answer_text)
-    return redirect("question_list")
+            question_id = question.id
+    return redirect('thread', question_id=question_id)
 
 def add_comment(request, answer_id, question_id):
     if request.method == "POST":
