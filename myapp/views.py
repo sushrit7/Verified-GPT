@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer, Comment
-# from .utils import ask_llm
+from .utils import ask_llm
 import markdown
 from google import genai
 from django.conf import settings
@@ -25,7 +25,7 @@ def update_thread(question_id):
         new_input += f" comment that said {comment.text} which had {comment.upvotes} upvotes"
 
     new_input += ". Using this information, what is the best answer to the question? Give better and more articulate answer addressing all the comments and prioritize high upvotes. Just give answer without filler words."
-    new_answer = "new ask_llm(new_input)"
+    new_answer = ask_llm(new_input)
     answer.text = new_answer
     answer.upvotes = 0
     answer.comments.all().delete()
@@ -39,7 +39,7 @@ def add_question(request):
         if question_text:
             question = Question.objects.create(text=question_text)
            # answer_text = ask_llm(question_text)
-            answer_text = "ask_llm(question_text)"
+            answer_text = ask_llm(question_text)
             Answer.objects.create(question=question, text=answer_text)
             question_id = question.id
     return redirect('thread', question_id=question_id)
