@@ -24,13 +24,13 @@
         <!-- Display Answers -->
         {% for answer in question.answers.all %}
             <p>→ {{ answer.text }}
-                <a href="{% url 'upvote_answer' answer.id %}">[Upvote]</a>
+                <a href="{% url 'upvote_answer' answer.id question.id%}">[Upvote]</a>
                 (Upvotes: {{ answer.upvotes }}) 
-                <a href="{% url 'downvote_answer' answer.id %}">[Downvote]</a>
+                <a href="{% url 'downvote_answer' answer.id question.id%}">[Downvote]</a>
                 </p></p>
 
             <!-- Add Comment Form -->
-            <form method="POST" action="{% url 'add_comment' answer.id %}">
+            <form method="POST" action="{% url 'add_comment' answer.id question.id%}">
                 {% csrf_token %}
                 <input type="text" name="comment_text" placeholder="Write a comment" required>
                 <button type="submit">Comment</button>
@@ -39,9 +39,9 @@
             <!-- Display Comments -->
             {% for comment in answer.comments.all %}
                 <p>--- {{ comment.text }} 
-                    <a href="{% url 'upvote_comment' comment.id %}">[Upvote]</a>
+                    <a href="{% url 'upvote_comment' comment.id question.id%}">[Upvote]</a>
                     (Upvotes: {{ comment.upvotes }}) 
-                    <a href="{% url 'downvote_comment' comment.id %}">[Downvote]</a>
+                    <a href="{% url 'downvote_comment' comment.id question.id%}">[Downvote]</a>
                 </p>
             {% endfor %}
         {% endfor %}
