@@ -3,306 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>Comment Thread</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f2f5;
             margin: 0;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            line-height: 1.4;
-            color: rgba(0, 0, 0, 0.85);
         }
-
-        .container {
-            width: 600px;
-            background: white;
-            padding: 15px;
+        
+        .card {
+            background-color: white;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             margin-bottom: 20px;
+            max-width: 700px;
+            margin: 0 auto;
         }
-
-        .post-box {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .post-input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            resize: none;
-        }
-
-        .icons {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-        }
-
-        .icons button {
-            background: #1877f2;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .post {
-            width: 600px;
-            padding: 15px;
-            border-radius: 8px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
+        
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 15px;
         }
-
-        .user-info img {
+        
+        .avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .user-info .details {
-            font-size: 14px;
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-
-        .user-info .details p {
-            margin: 0;
+        
+        .user-details {
+            display: flex;
+            flex-direction: column;
         }
-
-        .post-content {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-            background: #edf2fc;
-            padding: 10px;
-            border-radius: 5px;
+        
+        .username {
+            font-weight: bold;
+            margin-bottom: 2px;
         }
-        .post-actions {
+        
+        .time {
+            font-size: 0.8rem;
+            color: #65676B;
+            display: flex;
+            align-items: center;
+        }
+        
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #31A24C;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        
+        .question {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .answer {
+            background-color: #F0F2F5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .answer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #050505;
+            font-weight: bold;
+        }
+        
+        .ai-icon {
+            margin-right: 5px;
+            color: #1877F2;
+        }
+        
+        .voting-section {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #606770;
-        }
-        .comment-section {
-            margin-top: 10px;
-            padding: 10px 0;
-            border-top: 1px solid #ddd;
-        }
-        .comment-box {
-            display: flex;
             align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .vote-buttons {
+            display: flex;
             gap: 10px;
-            margin-top: 10px;
         }
-        .comment-box img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-        .comment-box input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-        }
-
-
-        button {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            appearance: none;
-            font-size: 14px;
-            padding: 4px 8px;
-            color: rgba(0, 0, 0, 0.85);
-            background-color: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.2);
+        
+        .vote-btn {
+            padding: 6px 12px;
+            background-color: #F0F2F5;
+            border: none;
             border-radius: 4px;
-        }
-    
-        button:hover,
-        button:focus,
-        button:active {
             cursor: pointer;
-            background-color: #ecf0f1;
-        }
-
-        .comment-thread {
-            width: 700px;
-            max-width: 100%;
-            margin: auto;
-            padding: 0 30px;
-            background-color: #fff;
-            border: 1px solid transparent; /* Removes margin collapse */
-        }
-        .m-0 {
-            margin: 0;
-        }
-        .sr-only {
-            position: absolute;
-            left: -10000px;
-            top: auto;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-        }
-
-        /* Comment */
-
-        .comment {
-            position: relative;
-            margin: 20px auto;
-        }
-        .comment-heading {
+            font-weight: 500;
             display: flex;
             align-items: center;
-            height: 50px;
-            font-size: 14px;
+            transition: background-color 0.2s;
         }
-        .comment-voting {
-            width: 20px;
-            height: 32px;
-            border: 1px solid rgba(0, 0, 0, 0.2);
+        
+        .vote-btn:hover {
+            background-color: #E4E6E9;
+        }
+        
+        .upvote-btn {
+            color: #065F46;
+        }
+        
+        .downvote-btn {
+            color: #B91C1C;
+        }
+        
+        .comment-section {
+            border-top: 1px solid #E4E6E9;
+            padding-top: 15px;
+        }
+        
+        .comment-input {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .comment-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #CED0D4;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .comment-input input:focus {
+            border-color: #1877F2;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 16px;
+            background-color: #E4E6E9;
+            border: none;
             border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
         }
-        .comment-voting button {
-            display: block;
-            width: 100%;
-            height: 50%;
-            padding: 0;
-            border: 0;
-            font-size: 10px;
+        
+        .action-btn:hover {
+            background-color: #D8DADF;
         }
-        .comment-info {
-            color: rgba(0, 0, 0, 0.5);
-            margin-left: 10px;
+        
+        .primary-btn {
+            background-color: #1877F2;
+            color: white;
         }
-        .comment-author {
-            color: rgba(0, 0, 0, 0.85);
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .comment-author:hover {
-            text-decoration: underline;
-        }
-        .replies {
-            margin-left: 20px;
+        
+        .primary-btn:hover {
+            background-color: #166FE5;
         }
     </style>
 </head>
-
-
 <body>
-    <!-- User Post -->
-    <div class="post">
+    <div class="card">
         <div class="user-info">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="User">
-            <div class="details">
-                <p><strong>Anonymous</strong></p>
-                <p>35 mins ago · 🌎</p>
+            <div class="avatar">
+                <!-- Replace with actual image path when available -->
+                <div style="width: 100%; height: 100%; background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+                    <span style="color: #666;">A</span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="username">Anonymous</div>
+                <div class="time">{{ question.created_at|timesince }} ago</div>
             </div>
         </div>
+        
         <div class="question" style="margin-bottom: 10px;">
             <p style="margin: 0; color: #555;">{{question.text}}</p>
         </div>
-    {% for answer in question.answers.all %}
-    {% load markdown_extras %}
-<div class="question-answer" style="margin-top: 20px; border: 1px solid #ddd; border-radius: 8px; padding: 15px; background-color: #ffffff;">
-            <div  class="post-content" style="margin-top: 10px;">
-                <p style="margin: 0; font-weight: bold;">Answer 🤖 (Generated by AI):</p>
-                <p style="margin: 0; color: #333;">{{ answer.text|markdown }}</p>
-            </div>
+        
+        {% for answer in question.answers.all %}
+        {% load markdown_extras %}
 
-        <div class="post-actions">
-            <span>{{ answer.upvotes }}  Likes</span>
-            <span>💬 9 Comments</span>
-            <span>🔄 3 Shares</span>
+        <div class="answer">
+            <div class="answer-header">
+                <span class="ai-icon">🤖</span> Answer (Generated by AI):
+            </div>
+            <p>{{ answer.text|markdown }}</p>
         </div>
-        <div class="comment-voting">
-            <form method="POST" action="{% url 'upvote_answer' answer.id question.id %}">
-                {% csrf_token %}
-            <button type="submit" >
-                <span aria-hidden="true">&#9650;</span>
-                <span class="sr-only">Vote up</span>
-            </button>
-            </form>
-            <form method="POST" action="{% url 'downvote_answer' answer.id question.id %}">
-                {% csrf_token %}
-            <button type="submit">
-                <span aria-hidden="true">&#9660;</span>
-                <span class="sr-only">Vote down</span>
-            </button>
-            </form>
+        <div class="voting-section">
+            <div class="vote-buttons">
+                <form method="POST" action="{% url 'upvote_answer' answer.id question.id %}">
+                    {% csrf_token %}
+                <button class="vote-btn upvote-btn" type="submit" >
+                    <span>{{ answer.upvotes }} 👍 Upvotes</span>
+                </button>
+                </form>
+                <form method="POST" action="{% url 'downvote_answer' answer.id question.id %}">
+                    {% csrf_token %}
+                <button class="vote-btn downvote-btn" type="submit">
+                    <span>👎 Downvotes</span>
+                </button>
+                </form>
+            </div>
         </div>
         <div class="comment-box">
-            <form method="POST" action="{% url 'add_comment' answer.id question.id%}">
-                {% csrf_token %}
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="User">
-                <input type="text" name="comment_text" placeholder="Write a comment" required>
-                <button type="submit">Comment</button>
-            </form>
+            
         </div>
-        {% for comment in answer.comments.all %}
-        <div class="comment-thread">
-            <!-- Comment 1 start -->
-            <div class="comment" id="comment-1">
-                <span>{{ comment.upvotes }}  Likes</span>
-                <div class="comment-voting">
-                    <form method="POST" action="{% url 'upvote_comment' comment.id question.id %}">
-                        {% csrf_token %}
-                    <button type="submit" >
-                        <span aria-hidden="true">&#9650;</span>
-                        <span class="sr-only">Vote up</span>
-                    </button>
-                    </form>
-                    <form method="POST" action="{% url 'downvote_comment' comment.id question.id %}">
-                        {% csrf_token %}
-                    <button type="submit">
-                        <span aria-hidden="true">&#9660;</span>
-                        <span class="sr-only">Vote down</span>
-                    </button>
-                    </form>
+        
+        <div class="comment-section">
+            <div class="comment-input">
+                <div class="avatar">
+                    <!-- Replace with actual image path when available -->
+                    <div style="width: 100%; height: 100%; background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #666;">SNL</span>
+                    </div>
                 </div>
-    
-                <div class="comment-body">
-                    <p>
-                       {{comment.text}}
-                    </p>
-                    <button type="button">Reply</button>
-                    <button type="button">Flag</button>
-                </div>
-    
+                <form method="POST" action="{% url 'add_comment' answer.id question.id%}">
+                    {% csrf_token %}
+                    <input class="input" type="text" placeholder="Write a comment" required>
+                    <button type="submit">Comment</button>
+                </form>
             </div>
-            <!-- Comment 1 end -->
+            {% for comment in answer.comments.all %}
+            <div class="comment-thread">
+                <!-- Comment 1 start -->
+                <div class="comment" id="comment-1">
+                    <span>{{ comment.upvotes }}  Likes</span>
+                    <div class="comment-voting">
+                        <form method="POST" action="{% url 'upvote_comment' comment.id question.id %}">
+                            {% csrf_token %}
+                        <button type="submit" >
+                            <span aria-hidden="true">&#9650;</span>
+                            <span class="sr-only">Vote up</span>
+                        </button>
+                        </form>
+                        <form method="POST" action="{% url 'downvote_comment' comment.id question.id %}">
+                            {% csrf_token %}
+                        <button type="submit">
+                            <span aria-hidden="true">&#9660;</span>
+                            <span class="sr-only">Vote down</span>
+                        </button>
+                        </form>
+                    </div>
+        
+                    <div class="comment-body">
+                        <p>
+                           {{comment.text}}
+                        </p>
+                        <button type="button">Reply</button>
+                        <button type="button">Flag</button>
+                    </div>
+        
+                </div>
+                <!-- Comment 1 end -->
             </div> 
             {% endfor %} 
-        {% endfor %} 
-        <form method="POST" action="{% url 'update_thread' question.id %}">
-            {% csrf_token %}
-        <button type="submit">
-            <span aria-hidden="true">Update Answer</span>
-            <span class="sr-only">Update Answer</span>
-        </button>
-        </form>
+            {% endfor %} 
+            <div class="action-buttons">
+                <form method="POST" action="{% url 'update_thread' question.id %}">
+                    {% csrf_token %}
+                    <button class="action-btn primary-btn" type="submit">
+                        <!-- <span aria-hidden="true">Update Answer</span> -->
+                        <span class="sr-only">Update Answer</span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
-
 </html>
