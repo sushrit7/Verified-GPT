@@ -5,7 +5,7 @@ import markdown
 from google import genai
 from django.conf import settings
 from django.http import StreamingHttpResponse
-
+from django.db import models
 
 
 def question_list(request):
@@ -27,6 +27,8 @@ def update_thread(question_id):
     new_input += ". Using this information, what is the best answer to the question? Give better and more articulate answer addressing all the comments and prioritize high upvotes. Just give answer without filler words."
     new_answer = "new ask_llm(new_input)"
     answer.text = new_answer
+    answer.upvotes = 0
+    answer.comments.all().delete()
     answer.save()
 
 def add_question(request):

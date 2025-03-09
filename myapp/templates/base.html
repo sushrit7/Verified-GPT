@@ -130,7 +130,7 @@
                     
                     
                 </div>
-        
+        </form>
         </div>
     </div>
 
@@ -150,7 +150,7 @@
         <div class="post-actions">
             <form method="post" action="{% url 'thread' question.id %}" onsubmit="this.submit();">
                 {% csrf_token %}
-                <a href="#" onclick="this.parentElement.submit();">💬 Comments</a>
+                <button type="submit">💬 Comments </button>
             </form>            
             </form>
         </div>
