@@ -83,7 +83,11 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
-        
+
+        .comment-text{
+            border-radius: 5px;
+        }
+
         .answer-header {
             display: flex;
             align-items: center;
@@ -136,6 +140,7 @@
         .comment-section {
             border-top: 1px solid #E4E6E9;
             padding-top: 15px;
+            margin-bottom: 50px;
         }
         
         .comment-input {
@@ -251,21 +256,35 @@
             <!-- Comments section -->
             <div class="comments-section">
                 <!-- First comment -->
-                <div class="answer">
-                    <p>{{ comment.text }}</p>
+                <div class="comment-input">
+                    <div class="avatar">
+                        <!-- Replace with actual image path when available -->
+                        <div style="width: 100%; height: 100%; background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: #666;">SNL</span>
+                        </div>
+                    </div>
+                    <div class="comment-text">
+                        <p>{{ comment.text }}</p>
+                    </div>
                 </div>
+                
                 <div class="voting-section">
                     <div class="vote-buttons">
                         <form method="POST" action="{% url 'upvote_comment' comment.id question.id %}">
                             {% csrf_token %}
                         <button class="vote-btn upvote-btn" type="submit" >
-                            <span>{{ comment.upvotes }} 👍 Upvotes</span>
+                            <span>👍</span>
                         </button>
                         </form>
+
+                        <button class="vote-btn upvote-btn">
+                            <span>{{ comment.upvotes }}</span>
+                        </button>
+                
                         <form method="POST" action="{% url 'downvote_comment' comment.id question.id %}">
                             {% csrf_token %}
                         <button class="vote-btn downvote-btn" type="submit">
-                            <span>👎 Downvotes</span>
+                            <span>👎</span>
                         </button>
                         </form>
                     </div>
