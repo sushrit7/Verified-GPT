@@ -11,20 +11,18 @@ def thread(request, question_id):
     question = Question.objects.get(id = question_id)
     return render(request, "thread.html", {"question" : question})
 
-def update_thread(request, question_id):
-    if request.method == "POST":
-        question = Question.objects.get(id = question_id)
-        answer = [answer for answer in question.answers.all()][0]
-        comments = [comment for comment in answer.comments.all()]
-        new_input = f"Based on your last answer {answer.text} which received {answer.upvotes} for the question {question.text} there were"
-        for comment in comments:
-            new_input += f" comment that said {comment.text} which had {comment.upvotes} upvotes"
+def update_thread(question_id):
+    question = Question.objects.get(id = question_id)
+    answer = [answer for answer in question.answers.all()][0]
+    comments = [comment for comment in answer.comments.all()]
+    new_input = f"Based on your last answer {answer.text} which received {answer.upvotes} for the question {question.text} there were"
+    for comment in comments:
+        new_input += f" comment that said {comment.text} which had {comment.upvotes} upvotes"
 
-        new_input += ". Using this information, what is the best answer to the question? Give better and more articulate answer addressing all the comments and prioritize high upvotes. Just give answer without filler words."
-        new_answer = ask_llm(new_input)
-        answer.text = new_answer
-        answer.save()
-    return render(request, "thread.html", {"question" : question})
+    new_input += ". Using this information, what is the best answer to the question? Give better and more articulate answer addressing all the comments and prioritize high upvotes. Just give answer without filler words."
+    new_answer = "new ask_llm(new_input)"
+    answer.text = new_answer
+    answer.save()
 
 def add_question(request):
     if request.method == "POST":
@@ -33,7 +31,7 @@ def add_question(request):
         if question_text:
             question = Question.objects.create(text=question_text)
            # answer_text = ask_llm(question_text)
-            answer_text = ask_llm(question_text)
+            answer_text = "ask_llm(question_text)"
             Answer.objects.create(question=question, text=answer_text)
     return redirect("question_list")
 
