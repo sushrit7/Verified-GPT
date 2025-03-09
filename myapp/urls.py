@@ -13,5 +13,6 @@ urlpatterns = [
     path("downvote_answer/<int:answer_id>/<int:question_id>/", downvote_answer, name="downvote_answer"),
     path("delete_all/", deleteAll, name="delete_all"),
     path("thread/<int:question_id>/", views.thread, name="thread"),
-    path("update_thread/<int:question_id>/", update_thread, name="update_thread")
+    path("update_thread/<int:question_id>/", update_thread, name="update_thread"),
+    # path("updates_thread/<int:question_id>/", updates_thread, name="updates_thread")
 ]

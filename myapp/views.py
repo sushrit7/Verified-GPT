@@ -16,7 +16,7 @@ def thread(request, question_id):
     question = Question.objects.get(id = question_id)
     return render(request, "thread.html", {"question" : question})
 
-def update_thread(question_id):
+def updates_thread(question_id):
     question = Question.objects.get(id = question_id)
     answer = [answer for answer in question.answers.all()][0]
     comments = [comment for comment in answer.comments.all()]
@@ -30,6 +30,23 @@ def update_thread(question_id):
     answer.upvotes = 0
     answer.comments.all().delete()
     answer.save()
+
+def update_thread(request,question_id):
+    if request.method == "POST":
+        question = Question.objects.get(id = question_id)
+        answer = [answer for answer in question.answers.all()][0]
+        comments = [comment for comment in answer.comments.all()]
+        new_input = f"Based on your last answer {answer.text} which received {answer.upvotes} for the question {question.text} there were"
+        for comment in comments:
+            new_input += f" comment that said {comment.text} which had {comment.upvotes} upvotes"
+
+        new_input += ". Using this information, what is the best answer to the question? Give better and more articulate answer addressing all the comments and prioritize high upvotes. Just give answer without filler words."
+        new_answer = ask_llm(new_input)
+        answer.text = new_answer
+        answer.upvotes = 0
+        answer.comments.all().delete()
+        answer.save()
+    return redirect("thread", question_id = question_id)
 
 def add_question(request):
     question_id = None

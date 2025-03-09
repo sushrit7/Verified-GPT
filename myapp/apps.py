@@ -23,7 +23,7 @@ class MyappConfig(AppConfig):
         def check_and_run_tasks():
             print("Starting background task.")
             while True:
-                time.sleep(6)  # Check every 6 seconds (adjust as needed)
+                time.sleep(180)  # Check every 6 seconds (adjust as needed)
                 print("Checking answers...")
                 self.run_scheduled_tasks()
 
@@ -37,7 +37,7 @@ class MyappConfig(AppConfig):
 
     def execute_task(self):
         print("Executing scheduled task.")
-        self.check_answers_for_upvotes_and_comments(min_upvotes=4, min_comments=1)
+        self.check_answers_for_upvotes_and_comments(min_upvotes=4, min_comments=2)
 
     def check_answers_for_upvotes_and_comments(self, min_upvotes, min_comments):
         from .models import Question  # Import models here to avoid AppRegistryNotReady
@@ -60,6 +60,6 @@ class MyappConfig(AppConfig):
                     print(f"Answer for question '{question.text[:50]}' does not meet criteria.")
 
     def trigger_specific_code(self, answer):
-        from .views import update_thread
+        from .views import updates_thread
         # This is where your custom logic for the triggered code goes
-        update_thread(answer)
+        updates_thread(answer)

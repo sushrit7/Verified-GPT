@@ -195,6 +195,11 @@
 </head>
 <body>
     <div class="card">
+        <a href="{% url 'question_list' %}">
+            <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
+          </a>
+          
+          
         <div class="user-info">
             <div class="avatar">
                 <!-- Replace with actual image path when available -->
@@ -297,15 +302,15 @@
             </div>
             {% endfor %} 
             {% endfor %} 
-            <!-- <div class="action-buttons">
+            <div class="action-buttons">
                 <form method="POST" action="{% url 'update_thread' question.id %}">
                     {% csrf_token %}
-                    <button class="action-btn primary-btn" type="submit">
-                        <!-- <span aria-hidden="true">Update Answer</span> -->
-                        <span class="sr-only">Update Answer</span>
+                    <button class="action-btn" type="submit">
+                       <span aria-hidden="true">Update Answer (DEMO)</span>
+                        <span class="sr-only">Update Answer (DEMO)</span>
                     </button>
                 </form>
-            </div> -->
+            </div> 
         </div>
     </div>
 </body>
