@@ -13,12 +13,12 @@
 - **Backend**: Django framework using the MVT (Model-View-Template) architecture.  
 - **Frontend**: Integrated with Django templates for seamless user interaction.  
 - **API**: Powered by the Gemini API for AI response generation.  
-- **Database**: SQLite/PostgreSQL for storing questions, answers, comments, and votes.  
+- **Database**: SQLite for storing questions, answers, comments, and votes.  
 
 ## Installation  
 1. Clone the repository:  
    ```bash  
-   git clone https://github.com/your-username/verified-gpt.git  
+   git clone https://github.com/sushrit7/Verified-GPT.git
    cd verified-gpt  
     ```
 
@@ -31,16 +31,16 @@
 3. Install dependencies:
   ```bash
   pip install -r requirements.txt
-```
+  ```
 4. Set up the database:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
 5. Run the development server:
-```bash
-python manage.py runserver
-```
+   ```bash
+   python manage.py runserver
+   ```
 ## Usage  
 1. Open the application in your browser at `http://127.0.0.1:8000/`.  
 2. Post a question to generate an AI answer.  
