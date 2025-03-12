@@ -29,9 +29,9 @@
    env\Scripts\activate     # For Windows
     ```
 3. Install dependencies:
-  ```bash
-  pip install -r requirements.txt
-  ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 4. Set up the database:
    ```bash
    python manage.py makemigrations
