@@ -41,6 +41,11 @@
    ```bash
    python manage.py runserver
    ```
+## Setup Notes  
+- Add your `API_KEY` to the `.env` file. Create a file named `.env` in the project root directory and include the following line:  
+  ```env
+  API_KEY=your_api_key_here
+  ```
 ## Usage  
 1. Open the application in your browser at `http://127.0.0.1:8000/`.  
 2. Post a question to generate an AI answer.  
